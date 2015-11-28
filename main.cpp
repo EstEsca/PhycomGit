@@ -14,8 +14,8 @@ using namespace std;
 
 long double C = 300000000.0;
 long double R = 6400.0;
-long double TIMERESOLUTION = 100.0;
-// in nanoseconds, simulation-time for a tick
+long double TIMERESOLUTION = 100000.0;
+// in picoseconds, simulation-time for a tick
 long double RTIMERESOLUTION = 100000.0;
 // in microseconds, real-time for a tick
 #define ERRORRATE 1000
@@ -56,7 +56,7 @@ long double dist(long double x, long double y, long double z, long double a, lon
   return sqrt((x-a)*(x-a)+(y-b)*(y-b)+(z-c)*(z-c));
 }
 long double cDist(long double x, long double y, long double z, long double a, long double b, long double c, long long error){
-  return dist(x,y,z,a,b,c)-(((long double)(C * error)+0.0)/1000000000);
+  return dist(x,y,z,a,b,c)-(((long double)(C * error)+0.0)/1000000000000);
 }
 int chkComm(long double x,long double y,long double z,long double a,long double b, long double c){
   long double check=(a*x-x*x+b*y-y*y+c*z-z*z)
@@ -543,7 +543,7 @@ sate* S3;
 long double at, ap, ar, ax, ay, az, eDist;
 int count;
 
-for(unsigned long i=0;i<1000000000;i++){
+for(unsigned long i=0;i<1000000000;i=i+10){
     count = 0;
     for(int j=0;j<10000;j++){
  //       PRINTLINE;
@@ -605,7 +605,7 @@ for(unsigned long i=0;i<1000000000;i++){
         vSate.clear();
         vCenter.clear();
     }
-        cout << i <<"ns : " << count << endl;
+        cout << i <<"ps : " << count << endl;
 
 }//고도를 6400으로 고정할 때 오차가 더 적은지 확인해 보자
 
